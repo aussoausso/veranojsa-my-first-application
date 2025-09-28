@@ -1,20 +1,24 @@
 <x-layout>
-    <x-slot:heading>
-        Jobs
-    </x-slot:heading>
+    <x-slot:heading>Jobs</x-slot:heading>
 
     <a href="/jobs/create" class="text-blue-500">+ Create Job</a>
 
-    <ul>
+    <div class="mt-4">
         @foreach ($jobs as $job)
-            <li>
-                <a href="/jobs/{{ $job->id }}" class="text-indigo-600">
-                    {{ $job->title }} – {{ $job->salary }}
+            <div class="border p-4 mb-2">
+                <a href="/jobs/{{ $job->id }}" class="text-indigo-700 font-semibold">
+                    {{ $job->title }}
                 </a>
-            </li>
+                <p>Salary: {{ $job->salary }}</p>
+                <p>Employer: {{ $job->employer->name }}</p>
+                <div>
+                    @foreach ($job->tags as $tag)
+                        <span class="bg-gray-200 px-2 py-1 text-xs rounded">{{ $tag->name }}</span>
+                    @endforeach
+                </div>
+            </div>
         @endforeach
-    </ul>
+    </div>
 
     {{ $jobs->links() }}
 </x-layout>
-    

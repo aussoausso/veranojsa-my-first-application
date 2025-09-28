@@ -9,7 +9,11 @@ class Job extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'salary', 'employer_id'];
+    protected $fillable = [
+        'title',
+        'salary',
+        'employer_id',
+    ];
 
     public function employer()
     {
@@ -18,6 +22,6 @@ class Job extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'job_tag', 'job_id', 'tag_id');
     }
 }

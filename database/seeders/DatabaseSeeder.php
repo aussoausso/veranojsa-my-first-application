@@ -3,24 +3,19 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Employer;
+use App\Models\Tag;
+use App\Models\Job;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // Create a test user with the default "name" column
-        \App\Models\User::factory()->create([
-            'name'  => 'John Doe',
-            'email' => 'test@example.com',
-        ]);
+        Employer::factory(5)->create();
+        $tags = Tag::factory(10)->create();
 
-        $tags = \App\Models\Tag::factory(10)->create();
-
-        \App\Models\Job::factory(20)->create()->each(function ($job) use ($tags) {
-            $job->tags()->attach($tags->random(2));
+        Job::factory(20)->create()->each(function ($job) use ($tags) {
+            $job->tags()->attach($tags->random(2)->pluck('id')->toArray());
         });
     }
 }

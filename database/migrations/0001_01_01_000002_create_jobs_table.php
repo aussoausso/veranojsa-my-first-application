@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->string('title');           // job title
-            $table->string('salary');          // salary
-            $table->foreignId('employer_id')->constrained()->cascadeOnDelete(); // employer
+            $table->string('title');
+            $table->string('salary');
+            $table->foreignId('employer_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -22,4 +22,3 @@ return new class extends Migration
         Schema::dropIfExists('jobs');
     }
 };
-    

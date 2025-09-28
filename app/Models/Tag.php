@@ -13,6 +13,6 @@ class Tag extends Model
 
     public function jobs()
     {
-        return $this->belongsToMany(Job::class);
+        return $this->belongsToMany(Job::class, 'job_tag', 'tag_id', 'job_id');
     }
 }
