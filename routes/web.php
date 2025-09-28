@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Job;
 
 Route::get('/', function () {
-    return view('welcome');
+    // Show the jobs list on homepage instead of the default welcome page
+    return view('home', [
+        'jobs' => Job::with(['employer', 'tags'])->paginate(10)
+    ]);
 });
 
 Route::get('/jobs', function () {
@@ -16,6 +19,6 @@ Route::get('/jobs', function () {
 
 Route::get('/jobs/{id}', function ($id) {
     return view('job', [
-        'job' => Job::find($id)
+        'job' => Job::with(['employer', 'tags'])->findOrFail($id)
     ]);
 });
