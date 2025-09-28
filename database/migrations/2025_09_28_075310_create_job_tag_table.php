@@ -8,18 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('jobs', function (Blueprint $table) {
+        Schema::create('job_tag', function (Blueprint $table) {
             $table->id();
-            $table->string('title');           // job title
-            $table->string('salary');          // salary
-            $table->foreignId('employer_id')->constrained()->cascadeOnDelete(); // employer
+            $table->foreignId('job_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('tag_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('jobs');
+        Schema::dropIfExists('job_tag');
     }
 };
-    
