@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TagFactory extends Factory
 {
-public function definition(): array
-{
-    return [
-        'name' => fake()->unique()->word(), // add ->word()
-    ];
-}
-
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->unique()->word(),
+        ];
+    }
 }

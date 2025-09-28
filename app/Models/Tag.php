@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,13 +9,11 @@ class Tag extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
+    // A Tag belongs to many Jobs
     public function jobs()
     {
-        return $this->belongsToMany(
-            \App\Models\Job::class,
-            'job_listing_tag',   // pivot table
-            'tag_id',            // foreign key on pivot for Tag
-            'job_listing_id'     // foreign key on pivot for Job
-        );
+        return $this->belongsToMany(\App\Models\Job::class, 'job_listing_tag', 'tag_id', 'job_listing_id');
     }
 }
