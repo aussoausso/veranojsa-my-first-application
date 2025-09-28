@@ -4,12 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Job;
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
 Route::get('/jobs', function () {
     return view('jobs', [
-        'jobs' => Job::all()
+        // Eager load employer + tags and paginate 10 per page
+        'jobs' => Job::with(['employer', 'tags'])->paginate(10)
     ]);
 });
 
